@@ -36,4 +36,3 @@ Feel free to reach out for collaboration or geek talk 👇
   <a href="surajsm218@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white" alt="Gmail"></a>
   <a href="https://www.linkedin.com/in/suraj-menon-a581ab305/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white"></a>
 </p>
----
