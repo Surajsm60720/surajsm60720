@@ -24,10 +24,6 @@
  <img src="https://github-readme-streak-stats-seven-azure.vercel.app?user=surajsm60720&theme=tokyonight-duo&hide_border=true&border_radius=2" alt="streak">
 </div>
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=surajsm60720&show_icons=true&theme=tokyonight&hide_title=true&hide_border=true" width="48%" />
-</p>
-
 ## 📫 Let’s Connect!
 
 Feel free to reach out for collaboration or geek talk 👇
