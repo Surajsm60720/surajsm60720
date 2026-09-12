@@ -1,125 +1,57 @@
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0D1117,50:7B68EE,100:36BCF7&height=200&section=header&text=Suraj%20Menon&fontSize=58&fontColor=ffffff&fontAlignY=36&desc=iOS%20%26%20Web%20Developer%20from%20Bengaluru&descAlignY=57&descSize=16&animation=fadeIn" alt="header">
+# Suraj Menon
 
-<div align="center">
+iOS and web developer based in Bengaluru, India, currently an undergraduate at Dayananda Sagar College of Engineering. I build apps in Swift, ship websites in Next.js, and automate the boring parts of Linux with Python and Bash.
 
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&duration=3200&pause=900&color=7B68EE&center=true&vCenter=true&width=700&height=50&lines=Building+Saizen+%E2%80%94+anime+streaming+for+iOS;Shipping+Next.js+%2B+TypeScript+on+the+web;Automating+Linux+with+Python+%26+Bash" alt="typing">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=19&duration=3600&pause=1000&color=9B8CFF&vCenter=true&width=680&height=44&lines=Building+Saizen%2C+an+anime+streaming+app+for+iOS;Shipping+Next.js+and+TypeScript+on+the+web;Automating+Linux+with+Python+and+Bash">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=19&duration=3600&pause=1000&color=4C3BCF&vCenter=true&width=680&height=44&lines=Building+Saizen%2C+an+anime+streaming+app+for+iOS;Shipping+Next.js+and+TypeScript+on+the+web;Automating+Linux+with+Python+and+Bash" alt="Building Saizen, an anime streaming app for iOS. Shipping Next.js and TypeScript on the web. Automating Linux with Python and Bash.">
+</picture>
 
-<a href="https://github.com/Surajsm60720?tab=followers"><img src="https://custom-icon-badges.demolab.com/github/followers/Surajsm60720?style=for-the-badge&logo=person-add&label=Followers&labelColor=0D1117&color=7B68EE" alt="followers"></a>
-<a href="https://github.com/Surajsm60720?tab=repositories"><img src="https://custom-icon-badges.demolab.com/github/stars/Surajsm60720?style=for-the-badge&logo=star&label=Stars&labelColor=0D1117&color=36BCF7" alt="stars"></a>
-<img src="https://komarev.com/ghpvc/?username=Surajsm60720&style=for-the-badge&label=VIEWS&labelColor=0D1117&color=7B68EE" alt="views">
+[![Followers](https://custom-icon-badges.demolab.com/github/followers/Surajsm60720?style=flat-square&logo=person-add&label=Followers&labelColor=57606A&color=4C3BCF)](https://github.com/Surajsm60720?tab=followers)
+[![Stars](https://custom-icon-badges.demolab.com/github/stars/Surajsm60720?style=flat-square&logo=star&label=Stars&labelColor=57606A&color=4C3BCF)](https://github.com/Surajsm60720?tab=repositories)
 
-</div>
+## Currently building
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:7B68EE,100:36BCF7&height=2&section=header" alt="">
+**[Saizen](https://github.com/Surajsm60720/Saizen)** — anime streaming on iOS, built in Swift. Sources are pluggable, so the app ships without any baked in: it reads a [module catalog](https://github.com/Surajsm60720/saizen-modules) you point it at.
 
-<table width="100%">
-<tr>
-<td width="60%" valign="top">
+**[LifeOS](https://github.com/Surajsm60720/LifeOS)** — a calendar and notification scheduler in Swift, written because no existing app nagged me in quite the way I needed.
 
-### ✍️ &nbsp;A Little About Me
+## Selected work
 
-```yaml
-name:      Suraj Menon
-role:      iOS & Web Developer
-studying:  B.E. @ Dayananda Sagar College of Engineering
-location:  Bengaluru, India
+| Project | What it does | Built with |
+| --- | --- | --- |
+| [LLM Chat Navigator](https://github.com/Surajsm60720/llm-chat-navigator) | Jumps you to the message you need inside a long LLM conversation. On [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/llm-chat-navigator/). | JavaScript |
+| [Linux Starter Pack](https://github.com/Surajsm60720/linux-starter-pack) | Detects your distro and installs the packages you actually want, in one pass. | Python |
+| [i-made-an-oopsie](https://github.com/Surajsm60720/i-made-an-oopsie) | A single Bash script that recovers my Linux install every time I break it. | Bash |
+| [Portfolio](https://surajmenon.vercel.app) | My work and experience, [source here](https://github.com/Surajsm60720/portfolio). | Next.js, TypeScript |
 
-building:
-  - Saizen   # anime streaming, on iOS
-  - LifeOS   # calendar + notifications for my day
+## Tools I reach for
 
-toolbox:   [ Swift, TypeScript, Next.js, Python, Bash ]
-fuel:      [ manga, manhwa, anime, far too much music ]
-open_to:   [ collaboration, open source, geek talk ]
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=swift,ts,react,nextjs,tailwind,python,bash,linux,docker,git,vercel,figma&theme=dark&perline=6">
+  <img src="https://skillicons.dev/icons?i=swift,ts,react,nextjs,tailwind,python,bash,linux,docker,git,vercel,figma&theme=light&perline=6" alt="Swift, TypeScript, React, Next.js, Tailwind CSS, Python, Bash, Linux, Docker, Git, Vercel, Figma">
+</picture>
 
-</td>
-<td width="40%" valign="top">
+## Activity
 
-<img src="https://user-images.githubusercontent.com/74038190/229223263-cf2e4b07-2615-4f87-9c38-e37600f8381a.gif" width="100%" alt="">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=Surajsm60720&hide_border=true&border_radius=6&background=0D1117&ring=9B8CFF&fire=9B8CFF&currStreakLabel=9B8CFF&sideLabels=8B949E&currStreakNum=E6EDF3&sideNums=E6EDF3&dates=8B949E">
+  <img src="https://streak-stats.demolab.com?user=Surajsm60720&hide_border=true&border_radius=6&background=FFFFFF&ring=4C3BCF&fire=4C3BCF&currStreakLabel=4C3BCF&sideLabels=57606A&currStreakNum=1F2328&sideNums=1F2328&dates=6E7781" alt="GitHub contribution streak: total contributions, current streak, and longest streak">
+</picture>
 
-</td>
-</tr>
-</table>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Surajsm60720&theme=github_dark">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Surajsm60720&theme=default" alt="Repositories broken down by primary language" width="48%">
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Surajsm60720&theme=github_dark">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Surajsm60720&theme=default" alt="Languages ranked by number of commits" width="48%">
+</picture>
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:36BCF7,100:7B68EE&height=2&section=header" alt="">
+## Elsewhere
 
-<h3 align="center">⚡ Daily Drivers</h3>
+Open to collaboration, open source, and unhurried conversations about anime, manhwa, or why my Linux install broke again.
 
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=swift,ts,react,nextjs,tailwind,python,bash,linux,docker,git,vercel,figma&theme=dark&perline=6" alt="skills">
-</div>
-
-<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:7B68EE,100:36BCF7&height=2&section=header" alt="">
-
-<h3 align="center">🚀 Things I've Built</h3>
-
-<table width="100%">
-<tr>
-<td width="50%" valign="top">
-
-**🎬 [Saizen](https://github.com/Surajsm60720/Saizen)**
-
-Anime streaming at the comfort of your phone, with a pluggable [module catalog](https://github.com/Surajsm60720/saizen-modules) for stream sources.
-
-<a href="https://saizen.vercel.app"><img src="https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=swift&logoColor=white"></a>
-
-</td>
-<td width="50%" valign="top">
-
-**🗓️ [LifeOS](https://github.com/Surajsm60720/LifeOS)**
-
-Personalised calendar and notification scheduler that tracks my day so I stop forgetting things.
-
-<a href="https://lifeossite.vercel.app"><img src="https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=swift&logoColor=white"></a>
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-**🧭 [LLM Chat Navigator](https://github.com/Surajsm60720/llm-chat-navigator)**
-
-Browser extension that jumps you straight to the message you need in a giant LLM conversation.
-
-<a href="https://addons.mozilla.org/en-US/firefox/addon/llm-chat-navigator/"><img src="https://img.shields.io/badge/Firefox%20Add--on-FF7139?style=flat-square&logo=firefoxbrowser&logoColor=white"></a>
-
-</td>
-<td width="50%" valign="top">
-
-**🐧 [Linux Starter Pack](https://github.com/Surajsm60720/linux-starter-pack)**
-
-CLI that detects your distro and installs the packages you actually want, in one pass.
-
-<a href="https://linuxstarterpack.vercel.app/"><img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"></a>
-
-</td>
-</tr>
-</table>
-
-<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:36BCF7,100:7B68EE&height=2&section=header" alt="">
-
-<h3 align="center">📊 The Numbers</h3>
-
-<div align="center">
-
-<img src="https://streak-stats.demolab.com?user=Surajsm60720&hide_border=true&border_radius=10&background=0D1117&stroke=7B68EE&ring=7B68EE&fire=36BCF7&currStreakLabel=36BCF7&sideLabels=c0caf5&currStreakNum=ffffff&sideNums=ffffff&dates=8b93a8" alt="streak">
-
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Surajsm60720&theme=tokyonight" alt="languages">
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Surajsm60720&theme=tokyonight" alt="most used language">
-
-</div>
-
-<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:7B68EE,100:36BCF7&height=2&section=header" alt="">
-
-<h3 align="center">🤝 Let's Connect</h3>
-
-<p align="center">Open to collaboration, open source, or just some solid geek talk</p>
-
-<div align="center">
-  <a href="mailto:surajsm218@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white&labelColor=0D1117"></a>
-  <a href="https://www.linkedin.com/in/suraj-menon-a581ab305/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=0D1117"></a>
-  <a href="https://surajmenon.vercel.app"><img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white&labelColor=0D1117"></a>
-</div>
-
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:36BCF7,50:7B68EE,100:0D1117&height=140&section=footer" alt="footer">
+[![Email](https://img.shields.io/badge/Email-surajsm218%40gmail.com-4C3BCF?style=flat-square&logo=gmail&logoColor=white&labelColor=57606A)](mailto:surajsm218@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Suraj%20Menon-4C3BCF?style=flat-square&logo=linkedin&logoColor=white&labelColor=57606A)](https://www.linkedin.com/in/suraj-menon-a581ab305/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-surajmenon.vercel.app-4C3BCF?style=flat-square&logo=vercel&logoColor=white&labelColor=57606A)](https://surajmenon.vercel.app)
