@@ -1,13 +1,9 @@
-<img src="https://raw.githubusercontent.com/Surajsm60720/surajsm60720/scene/assets/scene.svg" alt="" width="900">
+<img src="https://raw.githubusercontent.com/Surajsm60720/surajsm60720/scene/assets/scene.svg" alt="Pixel art of the Bengaluru skyline, lit for the current time of day, with a dialogue box reading: Suraj Menon, iOS and web developer, Bengaluru, India." width="900">
 
 # Suraj Menon
 
 iOS and web developer based in Bengaluru, India, currently an undergraduate at Dayananda Sagar College of Engineering. I build apps in Swift, ship websites in Next.js, and automate the boring parts of Linux with Python and Bash.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Surajsm60720/surajsm60720/main/assets/headline-dark.svg">
-  <img src="https://raw.githubusercontent.com/Surajsm60720/surajsm60720/main/assets/headline-light.svg" alt="Building Saizen, an anime streaming app for iOS. Shipping Next.js and TypeScript on the web. Automating Linux with Python and Bash." width="680">
-</picture>
 
 [![Followers](https://custom-icon-badges.demolab.com/github/followers/Surajsm60720?style=flat-square&logo=person-add&label=Followers&labelColor=57606A&color=4C3BCF)](https://github.com/Surajsm60720?tab=followers)
 [![Stars](https://custom-icon-badges.demolab.com/github/stars/Surajsm60720?style=flat-square&logo=star&label=Stars&labelColor=57606A&color=4C3BCF)](https://github.com/Surajsm60720?tab=repositories)
