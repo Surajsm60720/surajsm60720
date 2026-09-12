@@ -3,8 +3,8 @@
 iOS and web developer based in Bengaluru, India, currently an undergraduate at Dayananda Sagar College of Engineering. I build apps in Swift, ship websites in Next.js, and automate the boring parts of Linux with Python and Bash.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=19&duration=3600&pause=1000&color=9B8CFF&vCenter=true&width=680&height=44&lines=Building+Saizen%2C+an+anime+streaming+app+for+iOS;Shipping+Next.js+and+TypeScript+on+the+web;Automating+Linux+with+Python+and+Bash">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=19&duration=3600&pause=1000&color=4C3BCF&vCenter=true&width=680&height=44&lines=Building+Saizen%2C+an+anime+streaming+app+for+iOS;Shipping+Next.js+and+TypeScript+on+the+web;Automating+Linux+with+Python+and+Bash" alt="Building Saizen, an anime streaming app for iOS. Shipping Next.js and TypeScript on the web. Automating Linux with Python and Bash.">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Surajsm60720/surajsm60720/main/assets/headline-dark.svg">
+  <img src="https://raw.githubusercontent.com/Surajsm60720/surajsm60720/main/assets/headline-light.svg" alt="Building Saizen, an anime streaming app for iOS. Shipping Next.js and TypeScript on the web. Automating Linux with Python and Bash." width="680">
 </picture>
 
 [![Followers](https://custom-icon-badges.demolab.com/github/followers/Surajsm60720?style=flat-square&logo=person-add&label=Followers&labelColor=57606A&color=4C3BCF)](https://github.com/Surajsm60720?tab=followers)
@@ -28,25 +28,29 @@ iOS and web developer based in Bengaluru, India, currently an undergraduate at D
 ## Tools I reach for
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=swift,ts,react,nextjs,tailwind,python,bash,linux,docker,git,vercel,figma&theme=dark&perline=6">
-  <img src="https://skillicons.dev/icons?i=swift,ts,react,nextjs,tailwind,python,bash,linux,docker,git,vercel,figma&theme=light&perline=6" alt="Swift, TypeScript, React, Next.js, Tailwind CSS, Python, Bash, Linux, Docker, Git, Vercel, Figma">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Surajsm60720/surajsm60720/main/assets/stack-dark.svg">
+  <img src="https://raw.githubusercontent.com/Surajsm60720/surajsm60720/main/assets/stack-light.svg" alt="Swift, TypeScript, React, Next.js, Tailwind, Python, Bash, Linux, Docker, Git, Vercel, Figma" width="460">
 </picture>
 
 ## Activity
 
+<div align="center">
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=Surajsm60720&hide_border=true&border_radius=6&background=0D1117&ring=9B8CFF&fire=9B8CFF&currStreakLabel=9B8CFF&sideLabels=8B949E&currStreakNum=E6EDF3&sideNums=E6EDF3&dates=8B949E">
-  <img src="https://streak-stats.demolab.com?user=Surajsm60720&hide_border=true&border_radius=6&background=FFFFFF&ring=4C3BCF&fire=4C3BCF&currStreakLabel=4C3BCF&sideLabels=57606A&currStreakNum=1F2328&sideNums=1F2328&dates=6E7781" alt="GitHub contribution streak: total contributions, current streak, and longest streak">
+  <img src="https://streak-stats.demolab.com?user=Surajsm60720&hide_border=true&border_radius=6&background=FFFFFF&ring=4C3BCF&fire=4C3BCF&currStreakLabel=4C3BCF&sideLabels=57606A&currStreakNum=1F2328&sideNums=1F2328&dates=6E7781" alt="GitHub contribution streak: total contributions, current streak, and longest streak" width="500">
 </picture>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Surajsm60720&theme=github_dark">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Surajsm60720&theme=default" alt="Repositories broken down by primary language" width="48%">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Surajsm60720&theme=default" alt="Repositories broken down by primary language" width="420">
 </picture>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Surajsm60720&theme=github_dark">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Surajsm60720&theme=default" alt="Languages ranked by number of commits" width="48%">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Surajsm60720&theme=default" alt="Languages ranked by number of commits" width="420">
 </picture>
+
+</div>
 
 ## Elsewhere
 
