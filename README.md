@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Surajsm60720/surajsm60720/main/assets/banner-dark.svg">
+  <img src="https://raw.githubusercontent.com/Surajsm60720/surajsm60720/main/assets/banner-light.svg" alt="" width="900">
+</picture>
+
 # Suraj Menon
 
 iOS and web developer based in Bengaluru, India, currently an undergraduate at Dayananda Sagar College of Engineering. I build apps in Swift, ship websites in Next.js, and automate the boring parts of Linux with Python and Bash.
