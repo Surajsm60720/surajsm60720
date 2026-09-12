@@ -1,0 +1,39 @@
+name: Render pixel scene
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["scripts/render_scene.py", ".github/workflows/scene.yml"]
+
+concurrency:
+  group: scene
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Render the scene for the current time in Asia/Kolkata
+        run: |
+          mkdir -p out/assets
+          python3 scripts/render_scene.py out/assets/scene.svg
+
+      - name: Publish to the scene branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd out
+          git init -q
+          git checkout -qb scene
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -qm "Render scene at $(TZ=Asia/Kolkata date '+%Y-%m-%d %H:%M %Z')"
+          git push -qf "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" scene
