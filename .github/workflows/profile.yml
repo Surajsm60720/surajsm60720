@@ -28,19 +28,26 @@ jobs:
         run: |
           mkdir -p out/assets
           url="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/scene/metrics.json"
+          fresh=false
           if curl -fsSL "$url" -o out/metrics.json; then
-            age=$(python3 - <<'EOF'
-          import json, datetime
-          t = json.load(open("out/metrics.json"))["generated_at"]
-          d = datetime.datetime.fromisoformat(t)
-          print(int((datetime.datetime.now(datetime.timezone.utc) - d).total_seconds() // 3600))
-          EOF
-            )
-            echo "cached metrics are ${age}h old"
-            [ "$age" -lt "$METRICS_MAX_AGE_HOURS" ] && echo "fresh=true" >> "$GITHUB_OUTPUT"
+            age=$(python3 -c '
+import json, datetime
+try:
+    t = json.load(open("out/metrics.json"))["generated_at"]
+    d = datetime.datetime.fromisoformat(t)
+    print(int((datetime.datetime.now(datetime.timezone.utc) - d).total_seconds() // 3600))
+except Exception:
+    print(9999)
+') || age=9999
+            echo "cached metrics are ${age}h old (max ${METRICS_MAX_AGE_HOURS}h)"
+            if [ "$age" -lt "$METRICS_MAX_AGE_HOURS" ]; then
+              fresh=true
+            fi
           else
-            echo "no cached metrics"
+            echo "no cached metrics found"
           fi
+          echo "fresh=$fresh" >> "$GITHUB_OUTPUT"
+          echo "reusing cache: $fresh"
 
       - name: Pull fresh metrics from the API
         if: steps.cache.outputs.fresh != 'true'
