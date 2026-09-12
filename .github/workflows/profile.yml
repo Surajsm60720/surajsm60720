@@ -30,15 +30,7 @@ jobs:
           url="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/scene/metrics.json"
           fresh=false
           if curl -fsSL "$url" -o out/metrics.json; then
-            age=$(python3 -c '
-import json, datetime
-try:
-    t = json.load(open("out/metrics.json"))["generated_at"]
-    d = datetime.datetime.fromisoformat(t)
-    print(int((datetime.datetime.now(datetime.timezone.utc) - d).total_seconds() // 3600))
-except Exception:
-    print(9999)
-') || age=9999
+            age=$(python3 scripts/cache_age.py out/metrics.json)
             echo "cached metrics are ${age}h old (max ${METRICS_MAX_AGE_HOURS}h)"
             if [ "$age" -lt "$METRICS_MAX_AGE_HOURS" ]; then
               fresh=true
