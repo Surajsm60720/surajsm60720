@@ -130,6 +130,24 @@ def build(metrics, now=None):
         parts.append(f'<text x="{tx}" y="{ty}" class="{cls}" fill="{fill}"'
                      + (f' text-anchor="{anchor}"' if anchor!="start" else '') + f'>{esc(s)}</text>')
 
+    def link_text(href, tx, ty, s, cls="bd", fill=None, anchor="start"):
+        """Hyperlinked label — fill defaults to accent so links read as text links."""
+        fill = accent if fill is None else fill
+        at = f' text-anchor="{anchor}"' if anchor != "start" else ""
+        parts.append(
+            f'<a href="{esc(href)}" target="_blank" rel="noopener noreferrer">'
+            f'<text x="{tx}" y="{ty}" class="{cls} lnk" fill="{fill}"{at}>{esc(s)}</text>'
+            f'</a>'
+        )
+
+    SITE = {
+        "TETHER": "https://tethersite.vercel.app",
+        "SAIZEN": "https://saizen.vercel.app",
+        "LIFEOS": "https://lifeossite.vercel.app/",
+        "PORTFOLIO": "https://surajmenon.vercel.app",
+    }
+    GH = "https://github.com/Surajsm60720"
+
     # ── STATUS ──
     ph = 232
     parts += panel(PAD, y, PW, ph, "STATUS", accent)
@@ -154,7 +172,9 @@ def build(metrics, now=None):
     y += ph + GAP
 
     # ── NOW BUILDING ──
-    builds=[("SAIZEN",["Anime streaming on iOS, in Swift. Sources are pluggable, so",
+    builds=[("TETHER",["A lid-closed awake utility for macOS, in Swift — keep the",
+                       "machine reachable without leaving the lid open."]),
+            ("SAIZEN",["Anime streaming on iOS, in Swift. Sources are pluggable, so",
                        "the app ships with none baked in: it reads a module catalog."]),
             ("LIFEOS",["A calendar and notification scheduler in Swift, written",
                        "because nothing else nagged me in quite the way I needed."])]
@@ -162,24 +182,35 @@ def build(metrics, now=None):
     parts += panel(PAD, y, PW, ph, "NOW BUILDING", accent)
     for i,(nm,lines) in enumerate(builds):
         by=y+60+i*52
-        text(PAD+24,by,nm,"itm",accent)
+        link_text(SITE.get(nm, f"{GH}/{nm.title()}"), PAD+24, by, nm, "itm", accent)
         for j,ln in enumerate(lines):
             text(PAD+24,by+17+j*14,ln,"sm",DIM)
     y += ph + GAP
 
-    # ── SELECTED WORK ──
-    rows=[("LLM CHAT NAVIGATOR","Jump to any message in a long LLM chat","JS"),
-          ("LINUX STARTER PACK","Detects your distro, installs what you want","PY"),
-          ("I-MADE-AN-OOPSIE","One Bash script that un-breaks my Linux","SH"),
-          ("PORTFOLIO","My work and experience, built in Next.js","TS")]
-    ph = 52 + len(rows)*34
-    parts += panel(PAD, y, PW, ph, "SELECTED WORK", accent)
-    for i,(nm,desc,tag) in enumerate(rows):
-        by=y+62+i*34
-        text(PAD+24,by,nm,"itm",INK)
-        text(PAD+250,by,desc,"sm",DIM)
-        parts.append(f'<rect x="{W-PAD-64}" y="{by-11}" width="40" height="16" fill="{accent}" opacity=".22"/>')
-        text(W-PAD-44,by,tag,"sm",accent,"middle")
+    # ── RECENT (live from metrics: latest public pushes + tip commit) ──
+    rows = M.get("recent") or []
+    ph = 52 + max(len(rows), 1) * 40
+    parts += panel(PAD, y, PW, ph, "RECENT", accent)
+    if not rows:
+        text(PAD+24, y+70, "No recent public pushes yet.", "sm", DIM)
+    else:
+        for i, r in enumerate(rows):
+            by = y+58+i*40
+            raw = str(r.get("name") or "")
+            nm = raw.upper()
+            lang = r.get("lang") or "?"
+            tag = {"TypeScript":"TS","JavaScript":"JS","Python":"PY","Swift":"SW",
+                   "Shell":"SH","HTML":"HT","CSS":"CSS","C++":"C++","Java":"JV",
+                   "Rust":"RS","TeX":"TEX"}.get(lang, (lang[:2] or "?").upper())
+            when = r.get("commit_at") or r.get("pushed") or ""
+            commit = r.get("commit") or "No commits on default branch"
+            if len(commit) > 64:
+                commit = commit[:61].rstrip() + "…"
+            link_text(f"{GH}/{raw}", PAD+24, by, nm, "itm", INK)
+            text(PAD+24, by+16, commit, "sm", DIM)
+            text(W-PAD-84, by, when, "sm", DIM, "end")
+            parts.append(f'<rect x="{W-PAD-64}" y="{by-11}" width="40" height="16" fill="{accent}" opacity=".22"/>')
+            text(W-PAD-44, by, tag, "sm", accent, "middle")
     y += ph + GAP
 
     # ── EQUIPMENT ──
@@ -195,14 +226,54 @@ def build(metrics, now=None):
         text(ix+17,iy+46,label,"tiny",DIM,"middle")
     y += ph + GAP
 
-    # ── CONTACT ──
-    ph = 124
-    parts += panel(PAD, y, PW, ph, "CONTACT", accent)
-    for i,(k2,v) in enumerate([("EMAIL","surajsm218@gmail.com"),
-                               ("LINKEDIN","in/suraj-menon-a581ab305"),
-                               ("PORTFOLIO","surajmenon.vercel.app")]):
-        by=y+58+i*24
-        text(PAD+24,by,k2,"sm",accent); text(PAD+150,by,v,"sm",INK)
+    # ── LINKS grid (icons + hyperlinked labels) ──
+    projects = [
+        ("tether", "TETHER", SITE["TETHER"]),
+        ("saizen", "SAIZEN", SITE["SAIZEN"]),
+        ("lifeos", "LIFEOS", SITE["LIFEOS"]),
+        ("portfolio", "PORTFOLIO", SITE["PORTFOLIO"]),
+    ]
+    socials = [
+        ("mail", "EMAIL", "mailto:surajsm218@gmail.com"),
+        ("github", "GITHUB", GH),
+        ("linkedin", "LINKEDIN", "https://www.linkedin.com/in/surajmenon60720/"),
+        ("x", "X", "https://x.com/surajsm223"),
+        ("instagram", "INSTAGRAM", "https://www.instagram.com/stargazer60720/"),
+    ]
+    ph = 52 + 78 + 78
+    parts += panel(PAD, y, PW, ph, "LINKS", accent)
+    text(PAD+24, y+48, "PROJECTS", "lbl", DIM)
+    text(PAD+24, y+126, "CONNECT", "lbl", DIM)
+
+    for i, (key, label, href) in enumerate(projects):
+        n = len(projects)
+        cw = (PW - 48) // n
+        cx = PAD + 24 + i * cw
+        cy = y + 58
+        ix, iy, isz = cx, cy, 28
+        parts.append(
+            f'<rect x="{cx-6}" y="{cy-4}" width="{cw-8}" height="56" fill="{accent}" opacity=".08"/>'
+            f'<image href="data:image/png;base64,{PROJECT_ICONS[key]}" '
+            f'xlink:href="data:image/png;base64,{PROJECT_ICONS[key]}" '
+            f'x="{ix}" y="{iy}" width="{isz}" height="{isz}"/>'
+            f'<a href="{esc(href)}" target="_blank" rel="noopener noreferrer">'
+            f'<text x="{ix+isz+10}" y="{iy+19}" class="itm lnk" fill="{INK}">{esc(label)}</text>'
+            f'</a>'
+        )
+
+    for i, (key, label, href) in enumerate(socials):
+        n = len(socials)
+        cw = (PW - 48) // n
+        cx = PAD + 24 + i * cw
+        cy = y + 136
+        k = 18 / 24.0
+        parts.append(
+            f'<rect x="{cx-6}" y="{cy-4}" width="{cw-8}" height="48" fill="{accent}" opacity=".08"/>'
+            f'<path transform="translate({cx},{cy+2}) scale({k:.4f})" fill="{INK}" d="{BRAND_ICONS[key]}"/>'
+            f'<a href="{esc(href)}" target="_blank" rel="noopener noreferrer">'
+            f'<text x="{cx+26}" y="{cy+16}" class="sm lnk" fill="{INK}">{esc(label)}</text>'
+            f'</a>'
+        )
     y += ph + PAD
 
     H = y
@@ -216,6 +287,7 @@ def build(metrics, now=None):
          f'.num{{font-size:25px;font-weight:700}}.lbl{{font-size:10px;letter-spacing:1px}}'
          f'.itm{{font-size:13px;font-weight:700;letter-spacing:1px}}'
          f'.sm{{font-size:11px}}.tiny{{font-size:8px;letter-spacing:.5px}}'
+         f'a{{cursor:pointer}}.lnk{{text-decoration:underline;text-underline-offset:3px}}'
          f'.tw{{animation:tw 3.4s steps(2,end) infinite}}'
          f'.tw:nth-of-type(3n){{animation-delay:1.1s}}.tw:nth-of-type(3n+1){{animation-delay:2.2s}}'
          f'.lt{{animation:lt 6s steps(2,end) infinite}}.lt:nth-of-type(4n){{animation-delay:2.5s}}'
@@ -230,11 +302,15 @@ def build(metrics, now=None):
          f'@media (prefers-reduced-motion:reduce){{.tw,.lt,.cl,.ar{{animation:none}}'
          f'.ln{{animation:none;opacity:0}}.ln:first-of-type{{opacity:1}}}}')
 
+    recent_names = ", ".join(r["name"] for r in (M.get("recent") or [])[:3] if r.get("name"))
     alt=(f"Suraj Menon's GitHub profile as pixel art, lit for {name} in Bengaluru. "
-         f"{M['followers']} followers, {M['stars']} stars, {M['repos']} repositories, "
+         f"{M['followers']} followers, {M['stars']} stars, {M['repos']} public repositories, "
          f"{M['commits_year']} commits this year, current streak {M['streak_current']} days. "
-         f"Building Saizen and LifeOS in Swift. Contact surajsm218@gmail.com.")
-    out=[f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
+         f"Building Tether, Saizen, and LifeOS in Swift."
+         + (f" Recent: {recent_names}." if recent_names else "")
+         + " Contact surajsm218@gmail.com.")
+    out=[f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+         f'width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
          f'shape-rendering="crispEdges" role="img" aria-label="{esc(alt)}">',
          f'<style>{css}</style>',
          f'<rect width="{W}" height="{H}" fill="{land}"/>']
@@ -277,6 +353,21 @@ def build(metrics, now=None):
                f'{esc(name)} &#183; {now:%H:%M} IST &#183; data {esc(ts)} UTC</text>')
     out.append('</svg>')
     return "\n".join(out), name, now, H
+
+PROJECT_ICONS = {
+    "tether": "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",
+    "saizen": "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",
+    "lifeos": "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAARGVYSWZNTQAqAAAACAABh2kABAAAAAEAAAAaAAAAAAADoAEAAwAAAAEAAQAAoAIABAAAAAEAAAAgoAMABAAAAAEAAAAgAAAAAKyGYvMAAAHNaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+CiAgIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPGV4aWY6Q29sb3JTcGFjZT4xPC9leGlmOkNvbG9yU3BhY2U+CiAgICAgICAgIDxleGlmOlBpeGVsWERpbWVuc2lvbj4xMDI0PC9leGlmOlBpeGVsWERpbWVuc2lvbj4KICAgICAgICAgPGV4aWY6UGl4ZWxZRGltZW5zaW9uPjEwMjQ8L2V4aWY6UGl4ZWxZRGltZW5zaW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4Kwe07qQAABx1JREFUSA1dVltsXMUZnn9uZ29e27GT2NiUALmAqKCXKOISEAg1QCtVIFH18lLR54D6UqnPPPWdJ16QeEFUfUBURa1SqUBAIGKJgAQCAiS4wY4vm3Xs9e6ePefMTL9/ztmN1OPZc+byz/d//2X+MVnbEkIEIQg/QfiLTwhBEJUDXixnBc9GsWo8+WCBVxgjACQwWpTUERtI5U5er1bGmELICUyp8iZWJcwTpXjECRMMoOkSbjxVoVc6wIEhsTeSqUCwq+SLD+R5a3zKLyTHE7EDBeMxviUN/gIYeJJIEeEd1ZRvdlOpw7OG4H3wQXjAROZR10QLCV3BVtD4MJaUSpKCc3JH1lirNauZ6GcTABrybJTnI22ND84LJ+JkpBlJR0yllR1v5AmwllIradFm2jN//OWDKgsbfWFNTStuRteUskonIshj99516omH1r5Z895LbEQEonXRikrRzQBGdOaulQH6fkq/+fkjf37mgafntZStQC3B76YXzUBTeJNpnzhz6vkXX7j30QeGKQxNmkmNUZFFeEf6jGlNqxwwdwJ6IqVtT8386v4Tfzh9LOntXbu6sd5echwPCdeUEQ7BSSmShlNPPvX9yidX/3n+tU9Xd/Z7JPLEht5gFI1gVQgyq+Ef2LNzjFC1v/z29O/uOzxc21zb2Tlyy+zDR+eAz2LsAtbBzfnNjet/7V5fLnpnzxy/Z2H67BsX/vT7n7y9cuWdle+MgW/4MFQuimkj4ehm48Dhmakzyy2x13/r0tpbn69+dmMg0izrDs5dvLzf7fW6vX9fvJJ3eiIdfbCx++Z/Plr94lsxzB5fbi8fmH7yx3O3H24uzreYCT9BIWIxJ5E3BknpgzrUbj/3w/nE5XVrBtY++oODpsiLzu7SlB32B/lgeHvTiL2Bkn7RqtnNjZ/NN6ZJZIV79bPu16udUyfaX/53b3t3WB4bPmhMP7p4qjGbOcqLcH1mPlk8tER0ROnM+xTH/CgyOkyxMyM5otSHegjP3gfoAgI7a9eC+OLcxb0vv9/9bnOopOTDMY4BG9NqTP/6ibN/f/d1WaPmU7+wCwe9816QCsEaiRTnQWSFUHPQoIl7hIQNktobW+blD2xv2G6R6ai8oFKqjAFOkUpH6bkP/7Y/3G/UG4mWfphKPqFe+GL9kujfIJwr8gHNZyMsgaHI8+4gvXSD45Fo1ajXgPP5lUHhwKREDrLKUcwQbXTX4KvEWqX4hAul2XmCnIMFTJ+3ceVQQsWDhcQlciidRFrrGnaamjWIJR/7aCU7lrvYCiDQQl5BDqGH9X5/zxuUAbr1uIO78swTGwWrXJZqzEjl5ow+aE2eZ5wtgE+audsHVGzgyHTKPn9/ujSNEmGMUYiRNvLTC6rfVzYh4tqgDd4oS8YktrNu1i8nNjGkjdBWao0tYLbX34V6QMWHocuDxvHCVB3BDB6VDUfO5Vk4eTqAc5ZKgxiHAjGAT0TA0qFbIU9ZmknlSSlYpxSBGIDAWaJTQIAbEGOHK2E4f7kzKpxFKUKwFJxaVyilJlnp7nbyIsF86KuAEwAsYyBnEjVK1cr7CuZKaTQ7lgstUmP83LRAaoTXuMyVFmR5IYqCq30Id7QaTZAbXCUagpAMiVdHkMDeFUIbuu1OVFOlUcgI/kGZctjI9PmJMeBOgLQrcu9zqaqwc1i4BImD9aQuPRkSWwPa2icjKRScGMgO5MzCMjubE0m4wNthROV0uChqAq0AdHjZ+QJyVVZFBEZB1WJFRswucCOLFdxHkGPJmMLoQG3rwNSpZx5jH2GSy2KspvhCJ6Zyl1NAxeaN3jkqCtiO1e6WbLYQTqVqOVIeeTDIfRHSBrrgRuwZJCSM2e10Pv7XeR6WLsKxqkIMC3xxeFY7P8Lxwh7kNcKMnEQA1781WZZQbV7UbqFkUSZzm3n4pp8ajVXNDX7BuVQiGw32Ol0clSoCk3INpu2GfPG5u5fm9Pb2NvjDCKQj/Abf3X1yVG+iDyncApQ7f1vN/Gi6iaD5InM5rhdUFLe9vYVboiwvkTe7CLpxjsAYRTFcuz7c3Mk7nZ3771lYXDyEhEchQgsugzYE1hejUIwoOMEzGQSIBSCWXXjv/Euv/ANsjAppngOwipE1sQbHEQgmxuICv+vIzCMnj9brCaZxbhAipoCntLzscmbwD9PDNHv3wqWvVm9wOEKZo3EF1OOdXKqDJB9DvnY8pwb+AUDu8RvwXB0hVkpyUsAVnBox8fFvCwiggPEwXgMVlzKLmFrFDZuAjfKOkgR00OesQSe2eCejx8Tx4sZ6OOnRcXx9jHEiFU7u6iRX46gJm2EmuAA/GhRrL3Ahzu/IhnmyBePG6iI6eyw+peRNBZispiI5fjFFGFSB4sN/5TOxIYph7v9xKzm+MmHxZHkcywolzvPNN9leaRiP497KKMxFAuM1VgpS/wOaodDVnX0BHwAAAABJRU5ErkJggg==",
+    "portfolio": "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAACAklEQVRYhWPg4OT+P5CYYdQBHKNRwDmaCLmJzjJqciL/Z+Sa/X843/v/zw1B/18u9f1/oMPpf6K76n8uLh7aZkMXY5n/n1YH/v+/JQSMP64K+P9nUzCcv7/d8b+QAB9tHCAkwPf/+WJfsEWz883+y0oIgsX5eHn/B1or/r8zxwsst6jYgjYOiHVRAVtwsNPpPycXpry6vOj/99AQ0VYUpb4DqiN1wQ7oTzPGqWZmnhlYTZaPBu1C4Np0j//CgvxY1Qjw8/0XF8YuR7EDBPn5/t+Y6Ql2xP15Xv9ro/T+66mIkWwZ2Q7g4OT+rygl/H9bk93/f5shqR4WIp1Jhv9N1CVo7wAOpARXH6P//+JUd7hjQPSmeltwOUFzB3AgYRlxwf8ZPhr/r0z3ADvk7Qr//1q0yAVcXDz/JUQE/vPwYC/t+Pl4/+9pdQA7YmmpJfUdsL3ZHmx4kocaTjVWOlJgNbdmeVLfAY2x+mDDd7bYE3QAKG1Q3QGyEoL/P6+B1APN8QYYUcHNzfN/VaU1WH5qtiltEmGondL/3xshlc+9uV7/F5dY/u9JMfq/oMji/+OF3mBxUC0Jyq40cQAHJ/d/e32Z/+cmucLLARgGVc1LSi3/K0mTZjnJDoBhHSXR/8E2iv9TvdT/+1spgHMIOeaQ7QBqYoZRB3CMRgHnaCLkHtBsCABZ0ABUZbWjiAAAAABJRU5ErkJggg==",
+}
+
+BRAND_ICONS = {
+"github": "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
+"linkedin": "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z",
+"x": "M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z",
+"instagram": "M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077",
+"mail": "M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z",
+}
 
 ICON_ORDER = [('swift', 'Swift'), ('typescript', 'TS'), ('react', 'React'), ('nextdotjs', 'Next.js'), ('tailwindcss', 'Tailwind'), ('python', 'Python'), ('gnubash', 'Bash'), ('linux', 'Linux'), ('docker', 'Docker'), ('git', 'Git'), ('vercel', 'Vercel'), ('figma', 'Figma')]
 ICONS = {

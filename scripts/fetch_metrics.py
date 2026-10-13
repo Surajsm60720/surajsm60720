@@ -6,18 +6,30 @@ from datetime import datetime, timezone
 USER  = os.environ.get("GH_USER", "Surajsm60720")
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
 
+# Public owned repos (including forks) so `repos` matches the profile's
+# public_repos count. Languages/stars/recent then filter forks as needed.
 QUERY = """
 query($login:String!) {
   user(login:$login) {
     followers { totalCount }
     following { totalCount }
-    repositories(first:100, ownerAffiliations:OWNER, isFork:false,
+    repositories(first:100, ownerAffiliations:OWNER, privacy:PUBLIC,
                  orderBy:{field:PUSHED_AT, direction:DESC}) {
       totalCount
       nodes {
-        name stargazerCount pushedAt primaryLanguage { name }
+        name isFork stargazerCount pushedAt
+        primaryLanguage { name }
         languages(first:8, orderBy:{field:SIZE, direction:DESC}) {
           edges { size node { name } }
+        }
+        defaultBranchRef {
+          target {
+            ... on Commit {
+              history(first:1) {
+                nodes { messageHeadline committedDate oid }
+              }
+            }
+          }
         }
       }
     }
@@ -62,44 +74,80 @@ def streaks(weeks):
             break
     return current, longest
 
+def latest_commit(node):
+    ref = node.get("defaultBranchRef") or {}
+    target = ref.get("target") or {}
+    history = (target.get("history") or {}).get("nodes") or []
+    if not history:
+        return None, None, None
+    c = history[0]
+    headline = (c.get("messageHeadline") or "").strip() or None
+    when = (c.get("committedDate") or "")[:10] or None
+    oid = (c.get("oid") or "")[:7] or None
+    return headline, when, oid
+
+def recent_projects(repos, limit=6):
+    """Most recently pushed public projects, skipping the profile meta-repo."""
+    out = []
+    for r in repos:
+        name = r["name"]
+        if name.lower() == USER.lower():
+            continue
+        # Prefer source projects over forks for the activity panel.
+        if r.get("isFork"):
+            continue
+        headline, commit_at, oid = latest_commit(r)
+        out.append({
+            "name": name,
+            "lang": (r["primaryLanguage"] or {}).get("name"),
+            "stars": r["stargazerCount"],
+            "pushed": (r.get("pushedAt") or "")[:10],
+            "commit": headline,
+            "commit_at": commit_at,
+            "commit_oid": oid,
+        })
+        if len(out) >= limit:
+            break
+    return out
+
 def main():
     if not TOKEN:
         raise SystemExit("GITHUB_TOKEN is required")
     u = gql(QUERY, {"login": USER})["user"]
     repos = u["repositories"]["nodes"]
+    sources = [r for r in repos if not r.get("isFork")]
     cc    = u["contributionsCollection"]
     cal   = cc["contributionCalendar"]
 
     langs = {}
-    for r in repos:
+    for r in sources:
         for e in r["languages"]["edges"]:
             langs[e["node"]["name"]] = langs.get(e["node"]["name"], 0) + e["size"]
     total = sum(langs.values()) or 1
     top = sorted(langs.items(), key=lambda kv: -kv[1])[:6]
 
     cur, longest = streaks(cal["weeks"])
+    recent = recent_projects(repos)
     out = {
         "generated_at":  datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "followers":     u["followers"]["totalCount"],
         "following":     u["following"]["totalCount"],
         "repos":         u["repositories"]["totalCount"],
-        "stars":         sum(r["stargazerCount"] for r in repos),
+        "stars":         sum(r["stargazerCount"] for r in sources),
         "commits_year":  cc["totalCommitContributions"],
         "prs_year":      cc["totalPullRequestContributions"],
         "contributions": cal["totalContributions"],
         "streak_current": cur,
         "streak_longest": longest,
         "languages":     [{"name": n, "pct": round(v*100/total, 1)} for n, v in top],
-        "recent":        [{"name": r["name"],
-                           "lang": (r["primaryLanguage"] or {}).get("name"),
-                           "stars": r["stargazerCount"],
-                           "pushed": r["pushedAt"][:10]} for r in repos[:6]],
+        "recent":        recent,
     }
     path = sys.argv[1] if len(sys.argv) > 1 else "metrics.json"
     with open(path, "w") as f:
         json.dump(out, f, indent=2)
-    print(f"{path}: {out['repos']} repos, {out['stars']} stars, "
-          f"{out['contributions']} contributions, streak {cur}/{longest}")
+    print(f"{path}: {out['repos']} public repos, {out['stars']} stars, "
+          f"{out['contributions']} contributions, streak {cur}/{longest}, "
+          f"{len(recent)} recent")
 
 if __name__ == "__main__":
     main()

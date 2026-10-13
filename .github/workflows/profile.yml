@@ -2,7 +2,9 @@ name: Render profile
 
 on:
   schedule:
-    - cron: "0 * * * *"
+    # Twice a day keeps the skyline roughly day/night accurate without
+    # an hourly workflow run. Metrics refresh on the same cadence.
+    - cron: "0 0,12 * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -13,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  METRICS_MAX_AGE_HOURS: 6
+  METRICS_MAX_AGE_HOURS: 12
 
 jobs:
   render:
@@ -49,9 +51,24 @@ jobs:
         run: python3 scripts/fetch_metrics.py out/metrics.json
 
       - name: Render the profile for the current time in Asia/Kolkata
-        run: METRICS=out/metrics.json python3 scripts/render_profile.py out/assets/profile.svg
+        run: |
+          METRICS=out/metrics.json python3 scripts/render_profile.py out/assets/profile.svg
+          mkdir -p assets
+          cp out/assets/profile.svg assets/profile.svg
 
-      - name: Publish to the scene branch
+      - name: Commit the SVG on main for README preview
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/profile.svg
+          if git diff --staged --quiet; then
+            echo "assets/profile.svg unchanged"
+          else
+            git commit -m "Render profile at $(TZ=Asia/Kolkata date '+%Y-%m-%d %H:%M %Z')"
+            git push
+          fi
+
+      - name: Publish metrics cache to the scene branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
