@@ -1,1 +1,1 @@
-[![Suraj Menon — iOS and web developer in Bengaluru. Building Tether, Saizen, and LifeOS. Open the SVG for in-card project and connect links.](assets/profile.svg)](assets/profile.svg)
+<img src="assets/profile.svg" alt="Suraj Menon — iOS and web developer in Bengaluru. Building Tether, Saizen, and LifeOS. Profile card tracks public repos, recent pushes, and latest commits." width="900" height="1318" />

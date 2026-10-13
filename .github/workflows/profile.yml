@@ -51,18 +51,15 @@ jobs:
         run: python3 scripts/fetch_metrics.py out/metrics.json
 
       - name: Render the profile for the current time in Asia/Kolkata
-        run: |
-          METRICS=out/metrics.json python3 scripts/render_profile.py out/assets/profile.svg
-          mkdir -p assets
-          cp out/assets/profile.svg assets/profile.svg
+        run: METRICS=out/metrics.json python3 scripts/render_profile.py assets/profile.svg
 
-      - name: Commit the SVG on main for README preview
+      - name: Commit the rendered card and README on main
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/profile.svg
+          git add assets/profile.svg README.md
           if git diff --staged --quiet; then
-            echo "assets/profile.svg unchanged"
+            echo "rendered assets unchanged"
           else
             git commit -m "Render profile at $(TZ=Asia/Kolkata date '+%Y-%m-%d %H:%M %Z')"
             git push
@@ -72,6 +69,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          mkdir -p out/assets
+          cp assets/profile.svg out/assets/profile.svg
           cd out
           git init -q
           git checkout -qb scene
