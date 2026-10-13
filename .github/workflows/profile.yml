@@ -25,8 +25,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Scheduled runs may reuse scene/metrics.json for up to METRICS_MAX_AGE_HOURS.
+      # push / workflow_dispatch always refetch — otherwise a stale cache (e.g. old
+      # repo count) keeps getting baked into the SVG for half a day.
       - name: Reuse the cached metrics if they are still fresh
         id: cache
+        if: github.event_name == 'schedule'
         run: |
           mkdir -p out/assets
           url="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/scene/metrics.json"
@@ -44,7 +48,7 @@ jobs:
           echo "reusing cache: $fresh"
 
       - name: Pull fresh metrics from the API
-        if: steps.cache.outputs.fresh != 'true'
+        if: github.event_name != 'schedule' || steps.cache.outputs.fresh != 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_USER: ${{ github.repository_owner }}
