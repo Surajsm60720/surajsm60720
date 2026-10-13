@@ -52,7 +52,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_USER: ${{ github.repository_owner }}
-        run: python3 scripts/fetch_metrics.py out/metrics.json
+        run: |
+          mkdir -p out
+          python3 scripts/fetch_metrics.py out/metrics.json
 
       - name: Render the profile for the current time in Asia/Kolkata
         run: METRICS=out/metrics.json python3 scripts/render_profile.py assets/profile.svg

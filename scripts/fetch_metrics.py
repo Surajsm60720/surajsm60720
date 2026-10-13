@@ -143,6 +143,7 @@ def main():
         "recent":        recent,
     }
     path = sys.argv[1] if len(sys.argv) > 1 else "metrics.json"
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     with open(path, "w") as f:
         json.dump(out, f, indent=2)
     print(f"{path}: {out['repos']} public repos, {out['stars']} stars, "
