@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-10-17T14:58:59+00:00",
+  "followers": 16,
+  "following": 10,
+  "repos": 27,
+  "stars": 7,
+  "commits_year": 342,
+  "prs_year": 19,
+  "contributions": 453,
+  "streak_current": 1,
+  "streak_longest": 9,
+  "languages": [
+    {
+      "name": "Swift",
+      "pct": 44.6
+    },
+    {
+      "name": "TypeScript",
+      "pct": 35.5
+    },
+    {
+      "name": "CSS",
+      "pct": 5.6
+    },
+    {
+      "name": "Python",
+      "pct": 4.6
+    },
+    {
+      "name": "JavaScript",
+      "pct": 3.1
+    },
+    {
+      "name": "C++",
+      "pct": 1.4
+    }
+  ],
+  "recent": [
+    {
+      "name": "portfolio",
+      "lang": "TypeScript",
+      "stars": 0,
+      "pushed": "2026-10-13",
+      "commit": "chore: update project versioning and sync GitHub data",
+      "commit_at": "2026-10-13",
+      "commit_oid": "17f7165"
+    },
+    {
+      "name": "Tether-website",
+      "lang": "TypeScript",
+      "stars": 0,
+      "pushed": "2026-10-12",
+      "commit": "Refactor GlassNav component to improve mobile navigation experience. \u2026",
+      "commit_at": "2026-10-12",
+      "commit_oid": "54b0a9b"
+    },
+    {
+      "name": "Tether",
+      "lang": "Swift",
+      "stars": 0,
+      "pushed": "2026-10-12",
+      "commit": "Release 3.3: Enhance lid-closed awake functionality and improve appea\u2026",
+      "commit_at": "2026-10-12",
+      "commit_oid": "798e7ab"
+    },
+    {
+      "name": "LifeOS-website",
+      "lang": "TypeScript",
+      "stars": 0,
+      "pushed": "2026-10-05",
+      "commit": "feat: add the v1.0.3 wish counter to the notebook",
+      "commit_at": "2026-10-05",
+      "commit_oid": "468b104"
+    },
+    {
+      "name": "Saizen-website",
+      "lang": "TypeScript",
+      "stars": 0,
+      "pushed": "2026-10-05",
+      "commit": "Keep the site version aligned with the Saizen app.",
+      "commit_at": "2026-10-05",
+      "commit_oid": "d524b68"
+    },
+    {
+      "name": "LifeOS",
+      "lang": "Swift",
+      "stars": 0,
+      "pushed": "2026-09-27",
+      "commit": "Patch v1.0.3",
+      "commit_at": "2026-09-27",
+      "commit_oid": "78e6d8d"
+    }
+  ]
+}
