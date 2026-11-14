@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-11-14T17:40:18+00:00",
+  "followers": 14,
+  "following": 11,
+  "repos": 28,
+  "stars": 7,
+  "commits_year": 343,
+  "prs_year": 55,
+  "contributions": 543,
+  "streak_current": 4,
+  "streak_longest": 9,
+  "languages": [
+    {
+      "name": "Swift",
+      "pct": 41.0
+    },
+    {
+      "name": "TypeScript",
+      "pct": 40.9
+    },
+    {
+      "name": "CSS",
+      "pct": 6.9
+    },
+    {
+      "name": "Python",
+      "pct": 3.9
+    },
+    {
+      "name": "JavaScript",
+      "pct": 1.7
+    },
+    {
+      "name": "C++",
+      "pct": 1.2
+    }
+  ],
+  "recent": [
+    {
+      "name": "PokeTag",
+      "lang": "TypeScript",
+      "stars": 0,
+      "pushed": "2026-11-13",
+      "commit": "Use Gen 6 item indexes for XY/ORAS bag names instead of Gen 3.",
+      "commit_at": "2026-11-13",
+      "commit_oid": "acc9f97"
+    },
+    {
+      "name": "portfolio",
+      "lang": "TypeScript",
+      "stars": 0,
+      "pushed": "2026-11-09",
+      "commit": "chore(data): weekly GitHub sync",
+      "commit_at": "2026-11-09",
+      "commit_oid": "ec302c0"
+    },
+    {
+      "name": "LifeOS-website",
+      "lang": "TypeScript",
+      "stars": 0,
+      "pushed": "2026-10-29",
+      "commit": "feat: bring the notebook up to LifeOS 1.0.5",
+      "commit_at": "2026-10-29",
+      "commit_oid": "50b6886"
+    },
+    {
+      "name": "LifeOS",
+      "lang": "Swift",
+      "stars": 0,
+      "pushed": "2026-10-29",
+      "commit": "Release v1.0.5",
+      "commit_at": "2026-10-29",
+      "commit_oid": "940f83b"
+    },
+    {
+      "name": "Tether-website",
+      "lang": "TypeScript",
+      "stars": 0,
+      "pushed": "2026-10-27",
+      "commit": "chore: sync product version to 3.4",
+      "commit_at": "2026-10-27",
+      "commit_oid": "ec77d2b"
+    },
+    {
+      "name": "Tether",
+      "lang": "Swift",
+      "stars": 0,
+      "pushed": "2026-10-27",
+      "commit": "Release 3.4: local-dev preview, OpenCode, and tap-to-download.",
+      "commit_at": "2026-10-27",
+      "commit_oid": "463077b"
+    }
+  ]
+}
