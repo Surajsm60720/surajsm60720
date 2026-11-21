@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-11-20T19:37:37+00:00",
+  "followers": 13,
+  "following": 11,
+  "repos": 28,
+  "stars": 7,
+  "commits_year": 349,
+  "prs_year": 84,
+  "contributions": 586,
+  "streak_current": 3,
+  "streak_longest": 9,
+  "languages": [
+    {
+      "name": "TypeScript",
+      "pct": 41.4
+    },
+    {
+      "name": "Swift",
+      "pct": 40.6
+    },
+    {
+      "name": "CSS",
+      "pct": 6.8
+    },
+    {
+      "name": "Python",
+      "pct": 3.8
+    },
+    {
+      "name": "JavaScript",
+      "pct": 1.7
+    },
+    {
+      "name": "C++",
+      "pct": 1.2
+    }
+  ],
+  "recent": [
+    {
+      "name": "PokeTag",
+      "lang": "TypeScript",
+      "stars": 0,
+      "pushed": "2026-11-19",
+      "commit": "fix: name HeartGold and SoulSilver locations",
+      "commit_at": "2026-11-19",
+      "commit_oid": "f61de56"
+    },
+    {
+      "name": "portfolio",
+      "lang": "TypeScript",
+      "stars": 0,
+      "pushed": "2026-11-16",
+      "commit": "chore(data): weekly GitHub sync",
+      "commit_at": "2026-11-16",
+      "commit_oid": "ac84e0d"
+    },
+    {
+      "name": "LifeOS-website",
+      "lang": "TypeScript",
+      "stars": 0,
+      "pushed": "2026-10-29",
+      "commit": "feat: bring the notebook up to LifeOS 1.0.5",
+      "commit_at": "2026-10-29",
+      "commit_oid": "50b6886"
+    },
+    {
+      "name": "LifeOS",
+      "lang": "Swift",
+      "stars": 0,
+      "pushed": "2026-10-29",
+      "commit": "Release v1.0.5",
+      "commit_at": "2026-10-29",
+      "commit_oid": "940f83b"
+    },
+    {
+      "name": "Tether-website",
+      "lang": "TypeScript",
+      "stars": 0,
+      "pushed": "2026-10-27",
+      "commit": "chore: sync product version to 3.4",
+      "commit_at": "2026-10-27",
+      "commit_oid": "ec77d2b"
+    },
+    {
+      "name": "Tether",
+      "lang": "Swift",
+      "stars": 0,
+      "pushed": "2026-10-27",
+      "commit": "Release 3.4: local-dev preview, OpenCode, and tap-to-download.",
+      "commit_at": "2026-10-27",
+      "commit_oid": "463077b"
+    }
+  ]
+}
